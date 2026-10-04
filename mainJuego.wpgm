@@ -1,20 +1,27 @@
 import wollok.game.*
 
-import juego.pepita
+import juego.*
 
 object config {
 
 	method configurarEscenario() {
-		game.title("Pepita")
+		game.title("¡boo?")
 		game.height(10)
 		game.width(10)
+		game.boardGround("1erfondo.jpg")
 	}
 }
-program PepitaGame {
+program booGame {
 
 	config.configurarEscenario()
-	
-	game.addVisualCharacter(pepita)
+
+	game.addVisualCharacter(hermanos)
+	game.addVisual(contadorDeCaramelos)
+
+	game.addVisual(caramelo)
+
+	game.onCollideDo(hermanos, {algoColisionado => algoColisionado.interactuar()})
 
 	game.start()
 }
+
