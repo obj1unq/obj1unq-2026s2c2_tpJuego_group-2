@@ -7,7 +7,9 @@ En el primer nivel los hermanos simplemente tienen que avanzar recogiendo los ca
 ## Equipo de desarrollo
 
 -Bitis, Lucía
+
 -Ochoa Romero, Alejandro
+
 -Peñalba, Giuliana
 
 ## Capturas
@@ -17,8 +19,11 @@ En el primer nivel los hermanos simplemente tienen que avanzar recogiendo los ca
 ## Reglas de Juego / Instrucciones
 
 -flecha ↓: avanzar
+
 -enter: recoger caramelo/arma
+
 -v: opción verdadera
+
 -f: opción falsa
 
 # Objetos con los que el personaje colisiona:
