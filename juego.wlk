@@ -16,6 +16,17 @@ class Caramelo {
   }
 }
 
+class ladron {
+  const property image = "ladron.png"
+  const property position
+  
+  method interactuar() {
+    game.removeVisual(self)
+    contadorDeCaramelos.sumarUnCaramelo()
+  }
+
+}
+
 object caramelo {
   const property position = game.at(3, 5)
   const property image = "caramelo.png"
