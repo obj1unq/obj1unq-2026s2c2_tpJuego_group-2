@@ -5,12 +5,24 @@ object hermanos {
   
   method image() = "fantasmasboo.png"
 }
-
+object generador {
+  const tiposDeCaramelo = [bonobom, tita]
+  method crearCaramelo(posicion) {
+    game.addVisual(new Caramelo(position = posicion,tipoDeCaramelo = tiposDeCaramelo.anyOne()))
+  }
+  method crearAleatoriamente() {
+    self.crearCaramelo(self.posicionAleatoria())
+  }
+  method posicionAleatoria() {
+    return game.at((0..game.width()-1).anyOne(),(0..game.height()-1).anyOne())
+  }
+}
 class Caramelo {
   const property position
+  const tipoDeCaramelo 
 
   method image() {
-    return "caramelo" + 1.randomUpTo(2).toString() + ".png"
+    return "caramelo-" + tipoDeCaramelo.toString() + ".png"
   }
  
   method interactuar() {
@@ -18,7 +30,15 @@ class Caramelo {
     contadorDeCaramelos.sumarUnCaramelo()
   }
 
-  method text() = "caramelo" 
+  
+}
+
+object bonobom {
+  
+}
+
+object tita {
+  
 }
 
 
