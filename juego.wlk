@@ -14,6 +14,8 @@ class Caramelo {
     game.removeVisual(self)
     contadorDeCaramelos.sumarUnCaramelo()
   }
+
+  method text() = "caramelo" 
 }
 
 class ladron {
