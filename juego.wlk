@@ -7,7 +7,7 @@ object hermanos {
 }
 
 class Caramelo {
-  const property position
+  const property position 
 
   method image() {
     return "caramelo" + 1.randomUpTo(2).toString() + ".png"
@@ -16,9 +16,7 @@ class Caramelo {
   method interactuar() {
     game.removeVisual(self)
     contadorDeCaramelos.sumarUnCaramelo()
-  }
-
-  method text() = "caramelo" 
+  } 
 }
 
 
