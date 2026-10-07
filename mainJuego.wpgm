@@ -4,6 +4,7 @@ import juego.*
 object config {
 	method configurarEscenario() {
 		game.title("¡boo?")
+		 game.cellSize(100)
 		game.height(10)
 		game.width(10)
 		game.boardGround("1erfondo.jpg")
