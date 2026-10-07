@@ -10,6 +10,12 @@ object generador {
   method crearCaramelo(posicion) {
     game.addVisual(new Caramelo(position = posicion,tipoDeCaramelo = tiposDeCaramelo.anyOne()))
   }
+  method crearAleatoriamente() {
+    self.crearCaramelo(self.posicionAleatoria())
+  }
+  method posicionAleatoria() {
+    return game.at((0..game.width()-1).anyOne(),(0..game.height()-1).anyOne())
+  }
 }
 class Caramelo {
   const property position
