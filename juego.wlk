@@ -19,7 +19,6 @@ object generador {
 }
 class Caramelo {
   const property position 
-  const property position
   const tipoDeCaramelo 
 
   method image() {
@@ -50,7 +49,47 @@ object contadorDeCaramelos {
   }
 }
 
+
 object nivel1 {
   const posiciones = #{}
   
 }
+
+class Pregunta {
+	const property texto
+	const property respuestaCorrecta
+
+	method realizar(unVisual) {
+		game.say(unVisual, texto)
+	}
+
+	method esCorrecta(unaRespuesta) {
+		return respuestaCorrecta == unaRespuesta
+	}
+}
+
+class Ladron {
+	var property position = game.at(0, 0)
+	var fueDescubierto = false
+	var property pregunta // Instancia de la clase Pregunta
+
+	method image() = if (fueDescubierto) "ladron.png" else "arbusto.png"
+
+	method interactuar() {
+		fueDescubierto = true
+		self.hacerPregunta()
+	}
+
+	method hacerPregunta() {
+		pregunta.realizar(self)
+	}
+
+	method responder(unaRespuesta) {
+		return pregunta.esCorrecta(unaRespuesta)
+	}
+}
+
+
+
+
+

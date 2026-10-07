@@ -10,7 +10,11 @@ object config {
 		game.boardGround("1erfondo.jpg")
 	}
 }
-
+const preguntaAcertijo = new Pregunta(
+		texto = "2 + 2 = 4",
+		respuestaCorrecta = "v"
+	)
+	
 program booGame {
 	config.configurarEscenario()
 	

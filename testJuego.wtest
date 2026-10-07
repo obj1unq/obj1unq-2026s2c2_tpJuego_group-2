@@ -1,14 +1,22 @@
-import juego.hermanos
+import juego.*
 import mainJuego.config
 
-describe "group of tests for pepita" {
 
-  method initialize() {
-    config.configurarEscenario()
-  }
-  test "pepita tiene posicion e imagen" {
-    assert.equals(game.at(5,5), hermanos.position())
-    assert.equals("fantasmasboo.png", hermanos.image())
-  }
+describe "Tests de Ladron y Pregunta" {
 
+	test "El ladrón se revela y mantiene su pregunta asignada" {
+		const unaPregunta = new Pregunta(texto = "2 + 2 = 4", respuestaCorrecta = "v")
+		const unLadron = new Ladron(position = game.at(1, 1), pregunta = unaPregunta)
+
+		// Comienza oculto
+		assert.equals("arbusto.png", unLadron.image())
+
+		// Al interactuar cambia de imagen
+		unLadron.interactuar()
+		assert.equals("ladron.png", unLadron.image())
+		
+		// Verificamos que la pregunta responda correctamente
+		assert.that(unLadron.responder("v"))
+		assert.notThat(unLadron.responder("f"))
+	}
 }
