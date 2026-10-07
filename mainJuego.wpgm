@@ -11,16 +11,20 @@ object config {
 		game.boardGround("1erfondo.jpg")
 	}
 }
+
+
 program booGame {
+
 
 	config.configurarEscenario()
 
 	game.addVisualCharacter(hermanos)
 	game.addVisual(contadorDeCaramelos)
 
-	game.addVisual(new Caramelo(position = game.at(3, 5)))
-	game.addVisual(new Caramelo(position = game.at(3, 2)))
-
+	
+	generador.crearCaramelo(game.at(3, 5))
+	
+generador.crearCaramelo(game.at(3, 2))
 	game.onCollideDo(hermanos, {algoColisionado => algoColisionado.interactuar()})
 
 	game.start()
