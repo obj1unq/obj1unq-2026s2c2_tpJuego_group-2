@@ -21,6 +21,8 @@ program booGame {
 	game.addVisual(new Caramelo(position = game.at(3, 5)))
 	game.addVisual(new Caramelo(position = game.at(1, 5)))
 
+	game.addVisual(new ladron(position = game.at(2, 4)))
+	
 	game.onCollideDo(hermanos, {algoColisionado => algoColisionado.interactuar()})
 
 	game.start()

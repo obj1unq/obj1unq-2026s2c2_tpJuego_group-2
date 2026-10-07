@@ -13,31 +13,27 @@ class Caramelo {
   method interactuar() {
     game.removeVisual(self)
     contadorDeCaramelos.sumarUnCaramelo()
-  }
-
-  method text() = "caramelo" 
+  } 
 }
 
-class ladron {
-  const property image = "ladron.png"
-  const property position
+class ladron { 
+  const property position 
+  var fueDescubierto = false 
   
-  method interactuar() {
-    game.removeVisual(self)
-    contadorDeCaramelos.sumarUnCaramelo()
+  method image(){ 
+    if (fueDescubierto) "ladron.png" else "arbusto.png" 
   }
 
-}
-
-object caramelo {
-  const property position = game.at(3, 5)
-  const property image = "caramelo.png"
-  
+  method hacerPregunta(){
+    
+  }
   method interactuar() {
-    game.removeVisual(self)
-    contadorDeCaramelos.sumarUnCaramelo()
+     fueDescubierto = true
+     self.hacerPregunta()
   }
 }
+
+
 
 object contadorDeCaramelos {
   var property cantidad = 0
