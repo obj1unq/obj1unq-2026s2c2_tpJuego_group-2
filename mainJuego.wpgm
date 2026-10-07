@@ -18,7 +18,8 @@ program booGame {
 	game.addVisualCharacter(hermanos)
 	game.addVisual(contadorDeCaramelos)
 
-	game.addVisual(caramelo)
+	game.addVisual(new Caramelo(position = game.at(3, 5)))
+	game.addVisual(new Caramelo(position = game.at(1, 5)))
 
 	game.onCollideDo(hermanos, {algoColisionado => algoColisionado.interactuar()})
 

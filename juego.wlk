@@ -8,6 +8,7 @@ object hermanos {
 
 class Caramelo {
   const property image = "caramelo.png"
+  const property position
   
   method interactuar() {
     game.removeVisual(self)
