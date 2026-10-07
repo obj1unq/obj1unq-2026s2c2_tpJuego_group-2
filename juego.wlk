@@ -7,9 +7,12 @@ object hermanos {
 }
 
 class Caramelo {
-  const property image = "caramelo.png"
   const property position
-  
+
+  method image() {
+    return "caramelo" + 1.randomUpTo(2).toString() + ".png"
+  }
+ 
   method interactuar() {
     game.removeVisual(self)
     contadorDeCaramelos.sumarUnCaramelo()
@@ -18,15 +21,7 @@ class Caramelo {
   method text() = "caramelo" 
 }
 
-object caramelo {
-  const property position = game.at(3, 5)
-  const property image = "caramelo.png"
-  
-  method interactuar() {
-    game.removeVisual(self)
-    contadorDeCaramelos.sumarUnCaramelo()
-  }
-}
+
 
 object contadorDeCaramelos {
   var property cantidad = 0
