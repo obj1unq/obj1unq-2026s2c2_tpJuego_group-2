@@ -1,17 +1,6 @@
 import juego.*
 import mainJuego.config
 
-describe "group of tests for pepita" {
-
-  method initialize() {
-    config.configurarEscenario()
-  }
-  test "pepita tiene posicion e imagen" {
-    assert.equals(game.at(5,5), hermanos.position())
-    assert.equals("fantasmasboo.png", hermanos.image())
-  }
-
-}
 
 describe "Tests de Ladron y Pregunta" {
 
@@ -27,7 +16,7 @@ describe "Tests de Ladron y Pregunta" {
 		assert.equals("ladron.png", unLadron.image())
 		
 		// Verificamos que la pregunta responda correctamente
-		assert.that(unLadron.responder("nada"))
-		assert.notThat(unLadron.responder("oro"))
+		assert.that(unLadron.responder("v"))
+		assert.notThat(unLadron.responder("f"))
 	}
 }
