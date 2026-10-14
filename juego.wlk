@@ -69,7 +69,7 @@ class Pregunta {
 }
 
 class Ladron {
-	var property position = game.at(0, 0)
+	var property position
 	var fueDescubierto = false
 	var property pregunta // Instancia de la clase Pregunta
 

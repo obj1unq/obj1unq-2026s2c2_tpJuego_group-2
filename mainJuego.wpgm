@@ -21,7 +21,9 @@ program booGame {
 	game.addVisualCharacter(hermanos)
 	game.addVisual(contadorDeCaramelos)
 	
-	
+	game.addVisual(new Ladron(position = game.at(5, 5),
+		pregunta = preguntaAcertijo))
+
 	generador.crearAleatoriamente()
 	generador.crearAleatoriamente()
 	generador.crearAleatoriamente()
@@ -33,3 +35,4 @@ program booGame {
 	
 	game.start()
 }
+
