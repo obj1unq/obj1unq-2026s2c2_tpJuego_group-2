@@ -10,8 +10,8 @@ object config {
 		game.boardGround("1erfondo.jpg")
 	}
 	method teclas() {
-		keyboard.v().onPressDo({ ladron.responder("v") })
-		keyboard.f().onPressDo({ ladron.responder("f") })
+		keyboard.v().onPressDo({ hermanos.responder("v") })
+		keyboard.f().onPressDo({ hermanos.responder("f") })
 	}
 }
 	

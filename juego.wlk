@@ -1,6 +1,7 @@
 import wollok.game.*
 object hermanos {
   var property position = game.at(3, 7)
+  var property conQuienHablo = null
   
   method image() = "fantasmasboo.png"
 
@@ -10,6 +11,9 @@ object hermanos {
 
   method estanEnPosicionDeArbusto() {
     return self.position() == arbusto.position()
+  }
+  method responder(unaRespuesta){
+      conQuienHablo.responder(unaRespuesta)
   }
 }
 
@@ -107,6 +111,7 @@ class Ladron {
 		esperandoRespuesta = true
 		pregunta.realizar(self)
     game.onTick(1000, pregunta.identidad(), {pregunta.realizar(self)})
+    hermanos.conQuienHablo(self)
 	}
 
 	method responder(unaRespuesta) {
