@@ -18,14 +18,19 @@ const preguntaAcertijo = new Pregunta(
 program booGame {
 	config.configurarEscenario()
 	
+	
+	
+	
+	generador.crearCarameloAleatoriamente()
+	generador.crearCarameloAleatoriamente()
+	generador.crearCarameloAleatoriamente()
+	generador.crearArmaAleatoriamente()
+	generador.crearArmaAleatoriamente()
+	generador.crearArmaAleatoriamente()
+
+	
 	game.addVisualCharacter(hermanos)
 	game.addVisual(contadorDeCaramelos)
-	
-	
-	generador.crearAleatoriamente()
-	generador.crearAleatoriamente()
-	generador.crearAleatoriamente()
-	
 	game.onCollideDo(
 		hermanos,
 		{ algoColisionado => algoColisionado.interactuar() }
