@@ -21,8 +21,8 @@ program booGame {
 	game.addVisualCharacter(hermanos)
 	game.addVisual(contadorDeCaramelos)
 	
-	game.addVisual(new Ladron(position = game.at(5, 5),
-		pregunta = preguntaAcertijo))
+	game.addVisual(new Ladron (position = arbusto.position()))
+	game.addVisual(arbusto)
 
 	generador.crearAleatoriamente()
 	generador.crearAleatoriamente()

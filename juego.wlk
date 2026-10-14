@@ -3,6 +3,14 @@ object hermanos {
   var property position = game.at(3, 7)
   
   method image() = "fantasmasboo.png"
+
+  method tienenCaramelos(){
+    return contadorDeCaramelos.cantidad()>= 1
+  }
+
+  method estanEnPosicionDeArbusto() {
+    return self.position() == arbusto.position()
+  }
 }
 
 object generador {
@@ -47,13 +55,12 @@ object contadorDeCaramelos {
   method sumarUnCaramelo() {
     cantidad += 1
   }
+
+  method restarCaramelo() {
+    cantidad = cantidad - 1
+  }
 }
 
-
-object nivel1 {
-  const posiciones = #{}
-  
-}
 
 class Pregunta {
 	const property texto
@@ -69,27 +76,36 @@ class Pregunta {
 }
 
 class Ladron {
-	var property position
-	var fueDescubierto = false
-	var property pregunta // Instancia de la clase Pregunta
+    var property position = arbusto.position()
+    var property image = "arbusto-ladron.png"
 
-	method image() = if (fueDescubierto) "ladron.png" else "arbusto.png"
+    method asaltarHermanos() {
+      if (hermanos.estanEnPosicionDeArbusto()) {
+                self.hacerPreguntaDeOrga()
+            }
+    }
 
-	method interactuar() {
-		fueDescubierto = true
-		self.hacerPregunta()
-	}
+    method robarCaramelo() {
+        contadorDeCaramelos.restarCaramelo()
+        game.say(self, "¡Te robé un caramelo muajaja!")
+    }
 
-	method hacerPregunta() {
-		pregunta.realizar(self)
-	}
+    method hacerPreguntaDeOrga() {
+    }
 
-	method responder(unaRespuesta) {
-		return pregunta.esCorrecta(unaRespuesta)
-	}
+    method interactuar() {
+        self.asaltarHermanos()
+    }
+}
+
+class Arbusto {
+    var property position = game.at(3, 2) 
+    var property image = "arbusto.png"
+
+    method interactuar() {
+    game.removeVisual(self)
+  }
 }
 
 
-
-
-
+const arbusto = new Arbusto()
