@@ -9,20 +9,24 @@ object config {
 		game.width(10)
 		game.boardGround("1erfondo.jpg")
 	}
+	method teclas() {
+		keyboard.v().onPressDo({ ladron.responder("v") })
+		keyboard.f().onPressDo({ ladron.responder("f") })
+	}
 }
-const preguntaAcertijo = new Pregunta(
-		texto = "2 + 2 = 4",
-		respuestaCorrecta = "v"
-	)
 	
 program booGame {
 	config.configurarEscenario()
-	
+	config.teclas()
+
 	game.addVisualCharacter(hermanos)
 	game.addVisual(contadorDeCaramelos)
 	
-	game.addVisual(new Ladron (position = arbusto.position()))
+	game.addVisual(ladron)
 	game.addVisual(arbusto)
+	
+	game.addVisual(ladron2)
+	game.addVisual(arbusto2)
 
 	generador.crearAleatoriamente()
 	generador.crearAleatoriamente()
@@ -35,4 +39,3 @@ program booGame {
 	
 	game.start()
 }
-
