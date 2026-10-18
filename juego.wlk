@@ -2,6 +2,7 @@ import wollok.game.*
 object hermanos {
   var property position = game.at(3, 7)
   var property conQuienHablo = null
+  var armaEnUso = null
   
   method image() = "fantasmasboo.png"
 
@@ -15,6 +16,21 @@ object hermanos {
   method responder(unaRespuesta){
       conQuienHablo.responder(unaRespuesta)
   }
+  method usarArma() {
+    inventario.usarArma(armaEnUso)
+  }
+  method guardarArma() {
+    if (armaEnUso != null) {
+      inventario.guardarArma(armaEnUso)
+      armaEnUso = null
+    }
+  }
+  
+  method cambiarDeArma(_armaNueva) {
+    inventario.cambiarDeArma(_armaNueva, armaEnUso)
+    armaEnUso = _armaNueva
+  }
+
 }
 
 object generador {
@@ -155,3 +171,44 @@ const ladron = new Ladron(position = arbusto.position(),pregunta = preguntaAcert
 
 const arbusto2 = new Arbusto(position = game.at(7, 7))
 const ladron2 = new Ladron(position = arbusto2.position(),pregunta = preguntaAcertijo2)
+
+
+object inventario {
+   var property armas = #{}
+   var property image = "inventario.png"
+   var dueñoDelInventario = hermanos
+
+   method guardarArma(_arma) {
+        armas.add(_arma)
+   }
+   
+   method usarArma(_arma) {
+        if (self.existeArma(_arma)) {
+            armas.remove(_arma)
+        } else {
+            game.say(dueñoDelInventario, "El arma no está en el inventario para usarla")
+        }
+   }
+
+   method armaConPoder(_poder) {
+        return armas.filter({arma => arma.poder() == _poder})
+   }
+   
+   method cambiarDeArma(_armaNueva, _armaVieja) {
+        self.validarCambiarDeArma(_armaNueva)
+        armas.remove(_armaNueva)
+        if (_armaVieja != null) {
+            armas.add(_armaVieja)
+        }
+   }
+   
+   method validarCambiarDeArma(_arma) {
+        if (not self.existeArma(_arma)) {
+            game.say(dueñoDelInventario, "El arma pedida no está en el inventario")
+        }
+   }
+   
+   method existeArma(_arma) {
+        return armas.contains(_arma)
+   }
+}
