@@ -19,16 +19,28 @@ object hermanos {
 
 object generador {
   const tiposDeCaramelo = [bonobom, tita]
+  const tiposDeArmas = [cuchillo,navaja,martillo]
+
   method crearCaramelo(posicion) {
     game.addVisual(new Caramelo(position = posicion,tipoDeCaramelo = tiposDeCaramelo.anyOne()))
   }
-  method crearAleatoriamente() {
+  method crearCarameloAleatoriamente() {
     self.crearCaramelo(self.posicionAleatoria())
   }
+  method crearArma(posicion) {
+    game.addVisual(new Arma(position = posicion,tipoDeArma = tiposDeArmas.anyOne()))
+  }
+  method crearArmaAleatoriamente() {
+    self.crearArma(self.posicionAleatoria())
+  }
+  
   method posicionAleatoria() {
     return game.at((0..game.width()-1).anyOne(),(0..game.height()-1).anyOne())
   }
 }
+
+
+
 class Caramelo {
   const property position 
   const tipoDeCaramelo 
@@ -55,6 +67,10 @@ object contadorDeCaramelos {
   const property position = game.at(1, 8)
   
   method text() = self.cantidad().toString() + " caramelos"
+
+   method textColor() = "#ffffff"
+
+   method textSize() = 100
   
   method sumarUnCaramelo() {
     cantidad += 1
@@ -131,6 +147,29 @@ class Ladron {
 		 
 	}
 
+class Arma {
+  const property position 
+  const tipoDeArma
+
+  method image() {
+    return "arma-" + tipoDeArma.toString() + ".png"
+  }
+ 
+  method interactuar() {
+    game.removeVisual(self)
+    //inventario.AgregarArma(self)
+  }
+}
+
+object cuchillo {
+  
+}
+object martillo {
+  
+}
+object navaja {
+  
+}
 	method robarCaramelo() {
 		if (hermanos.tienenCaramelos()) {
 			contadorDeCaramelos.restarCaramelo()

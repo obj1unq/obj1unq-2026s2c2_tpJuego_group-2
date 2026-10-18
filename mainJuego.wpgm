@@ -17,6 +17,7 @@ object config {
 	
 program booGame {
 	config.configurarEscenario()
+	
 	config.teclas()
 
 	game.addVisualCharacter(hermanos)
@@ -32,6 +33,16 @@ program booGame {
 	generador.crearAleatoriamente()
 	generador.crearAleatoriamente()
 	
+	generador.crearCarameloAleatoriamente()
+	generador.crearCarameloAleatoriamente()
+	generador.crearCarameloAleatoriamente()
+	generador.crearArmaAleatoriamente()
+	generador.crearArmaAleatoriamente()
+	generador.crearArmaAleatoriamente()
+
+	
+	game.addVisualCharacter(hermanos)
+	game.addVisual(contadorDeCaramelos)
 	game.onCollideDo(
 		hermanos,
 		{ algoColisionado => algoColisionado.interactuar() }
