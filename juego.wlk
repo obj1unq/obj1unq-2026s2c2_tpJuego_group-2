@@ -1,8 +1,20 @@
 import wollok.game.*
 object hermanos {
   var property position = game.at(3, 7)
+  var property conQuienHablo = null
   
   method image() = "fantasmasboo.png"
+
+  method tienenCaramelos(){
+    return contadorDeCaramelos.cantidad()>= 1
+  }
+
+  method estanEnPosicionDeArbusto() {
+    return self.position() == arbusto.position()
+  }
+  method responder(unaRespuesta){
+      conQuienHablo.responder(unaRespuesta)
+  }
 }
 
 object generador {
@@ -63,13 +75,12 @@ object contadorDeCaramelos {
   method sumarUnCaramelo() {
     cantidad += 1
   }
+
+  method restarCaramelo() {
+    cantidad = cantidad - 1
+  }
 }
 
-
-object nivel1 {
-  const posiciones = #{}
-  
-}
 
 class Pregunta {
 	const property texto
@@ -77,33 +88,64 @@ class Pregunta {
 
 	method realizar(unVisual) {
 		game.say(unVisual, texto)
-	}
 
+	}
+  method identidad() {
+    return self.identity()
+  }
 	method esCorrecta(unaRespuesta) {
 		return respuestaCorrecta == unaRespuesta
 	}
 }
 
+const preguntaAcertijo = new Pregunta(
+	texto = "¿2 + 2 = 4? (Presiona V o F)",
+	respuestaCorrecta = "v"
+)
+const preguntaAcertijo2 = new Pregunta(
+	texto = "¿2 + 2 = 4? (Presiona V o F)",
+	respuestaCorrecta = "v"
+)
 class Ladron {
-	var property position = game.at(0, 0)
-	var fueDescubierto = false
-	var property pregunta // Instancia de la clase Pregunta
-
-	method image() = if (fueDescubierto) "ladron.png" else "arbusto.png"
+	var property position = arbusto.position()
+	var property image = "arbusto-ladron.png"
+	var property pregunta 
+  	var esperandoRespuesta = false
+  var hizoProgunta = false
 
 	method interactuar() {
-		fueDescubierto = true
-		self.hacerPregunta()
+		self.asaltarHermanos()
+	}
+
+	method asaltarHermanos() {
+				if (not esperandoRespuesta) {
+			self.hacerPregunta()
+		}
 	}
 
 	method hacerPregunta() {
+		esperandoRespuesta = true
 		pregunta.realizar(self)
+    game.onTick(1000, pregunta.identidad(), {pregunta.realizar(self)})
+    hermanos.conQuienHablo(self)
 	}
 
 	method responder(unaRespuesta) {
-		return pregunta.esCorrecta(unaRespuesta)
+		/*if (esperandoRespuesta and !hizoProgunta) {*/
+    game.removeTickEvent(pregunta.identidad())
+			if (pregunta.esCorrecta(unaRespuesta)) {
+				game.say(self, "¡Rayos, es correcto! Te salvaste...")
+        esperandoRespuesta = false
+        hizoProgunta = true
+
+			} else {
+				game.say(self, "¡Incorrecto!")
+				self.robarCaramelo()
+        esperandoRespuesta = false
+        hizoProgunta = true
+			}
+		 
 	}
-}
 
 class Arma {
   const property position 
@@ -128,3 +170,27 @@ object martillo {
 object navaja {
   
 }
+	method robarCaramelo() {
+		if (hermanos.tienenCaramelos()) {
+			contadorDeCaramelos.restarCaramelo()
+			game.say(self, "¡Te robé un caramelo muajaja!")
+		} else {
+			game.say(self, "¡No tienes caramelos para robar!")
+		}
+	}
+}
+
+class Arbusto {
+    var property position 
+    var property image = "arbusto.png"
+
+    method interactuar() {
+    game.removeVisual(self)
+  }
+}
+
+const arbusto = new Arbusto(position = game.at(5, 5))
+const ladron = new Ladron(position = arbusto.position(),pregunta = preguntaAcertijo)
+
+const arbusto2 = new Arbusto(position = game.at(7, 7))
+const ladron2 = new Ladron(position = arbusto2.position(),pregunta = preguntaAcertijo2)
