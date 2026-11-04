@@ -17,7 +17,6 @@ object config {
 	
 program booGame {
 	config.configurarEscenario()
-	
 	config.teclas()
 
 	game.addVisualCharacter(hermanos)
@@ -29,10 +28,6 @@ program booGame {
 	game.addVisual(ladron2)
 	game.addVisual(arbusto2)
 
-	generador.crearAleatoriamente()
-	generador.crearAleatoriamente()
-	generador.crearAleatoriamente()
-	
 	generador.crearCarameloAleatoriamente()
 	generador.crearCarameloAleatoriamente()
 	generador.crearCarameloAleatoriamente()
