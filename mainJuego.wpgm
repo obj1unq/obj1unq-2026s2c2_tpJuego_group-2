@@ -35,9 +35,6 @@ program booGame {
 	generador.crearArmaAleatoriamente()
 	generador.crearArmaAleatoriamente()
 
-	
-	game.addVisualCharacter(hermanos)
-	game.addVisual(contadorDeCaramelos)
 	game.onCollideDo(
 		hermanos,
 		{ algoColisionado => algoColisionado.interactuar() }
