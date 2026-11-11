@@ -90,7 +90,7 @@ object tita {}
 
 object contadorDeCaramelos {
   var property cantidad = 0
-  const property position = game.at(1, 9)
+  const property position = game.at(19, 9)
   
   method text() = self.cantidad().toString() + " caramelos"
   method textColor() = "#ffffff"
@@ -170,7 +170,7 @@ class Ladron {
       hizoPregunta = true
     }
   }
-  
+
   method robarCaramelo() {
     if (hermanos.tienenCaramelos()) {
       contadorDeCaramelos.restarCaramelo()

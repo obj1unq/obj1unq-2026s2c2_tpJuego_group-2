@@ -17,10 +17,10 @@ object config {
 		cartelPregunta.position(game.at((game.width() - 1) / 2, 0))
 	}
 	method teclas() {
-		keyboard.up().onPressDo({hermanos.mover(arriba)})
-        keyboard.down().onPressDo({hermanos.mover(abajo)})
-        keyboard.left().onPressDo({hermanos.mover(izquierda)})
-        keyboard.right().onPressDo({hermanos.mover(derecha)})
+		keyboard.w().onPressDo({hermanos.mover(arriba)})
+        keyboard.s().onPressDo({hermanos.mover(abajo)})
+        keyboard.a().onPressDo({hermanos.mover(izquierda)})
+        keyboard.d().onPressDo({hermanos.mover(derecha)})
 		keyboard.v().onPressDo({ hermanos.responder("v") })
 		keyboard.f().onPressDo({ hermanos.responder("f") })
 	}
