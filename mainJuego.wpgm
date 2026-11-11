@@ -1,20 +1,60 @@
 import wollok.game.*
+import juego.*
+import direcciones.*
+import ladronYArbusto.*
+import caramelos.*
+import hermanos.*
 
-import juego.pepita
-
+ const arriba = new Arriba()
+ const abajo = new Abajo()
+ const derecha = new Derecha()
+ const izquierda = new Izquierda() 
+ 
 object config {
-
 	method configurarEscenario() {
-		game.title("Pepita")
+		game.title("¡boo?")
+		game.cellSize(100)
 		game.height(10)
-		game.width(10)
+		game.width(20)
+		game.boardGround("1erfondo.jpg")
+		cartelPregunta.position(game.at((game.width() - 1) / 2, 0))
+	}
+	method teclas() {
+		keyboard.w().onPressDo({hermanos.mover(arriba)})
+        keyboard.s().onPressDo({hermanos.mover(abajo)})
+        keyboard.a().onPressDo({hermanos.mover(izquierda)})
+        keyboard.d().onPressDo({hermanos.mover(derecha)})
+		keyboard.v().onPressDo({ hermanos.responder("v") })
+		keyboard.f().onPressDo({ hermanos.responder("f") })
 	}
 }
-program PepitaGame {
-
-	config.configurarEscenario()
 	
-	game.addVisualCharacter(pepita)
+program booGame {
+	config.configurarEscenario()
+	config.teclas()
 
+	game.addVisual(vidas)
+
+	game.addVisual(hermanos)
+	game.addVisual(contadorDeCaramelos)
+	
+	generador.crearArbustoAleatoriamente()
+	generador.crearArbustoAleatoriamente()
+	generador.crearArbustoAleatoriamente()
+	generador.crearArbustoAleatoriamente()
+	generador.crearCarameloAleatoriamente()
+	generador.crearCarameloAleatoriamente()
+	generador.crearCarameloAleatoriamente()
+	generador.crearsuperCarameloAleatoriamente()
+	generador.crearsuperCarameloAleatoriamente()
+	generador.crearsuperCarameloAleatoriamente()
+
+	game.addVisual(cartelPregunta)
+
+	game.onCollideDo(
+		hermanos,
+		{ algoColisionado => algoColisionado.interactuar() }
+	)
+	
 	game.start()
 }
