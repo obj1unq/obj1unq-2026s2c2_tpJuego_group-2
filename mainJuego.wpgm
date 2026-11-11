@@ -1,6 +1,12 @@
 import wollok.game.*
 import juego.*
+import direcciones.*
 
+ const arriba = new Arriba()
+ const abajo = new Abajo()
+ const derecha = new Derecha()
+ const izquierda = new Izquierda() 
+ 
 object config {
 	method configurarEscenario() {
 		game.title("¡boo?")
@@ -11,6 +17,10 @@ object config {
 		cartelPregunta.position(game.at((game.width() - 1) / 2, 0))
 	}
 	method teclas() {
+		keyboard.up().onPressDo({hermanos.mover(arriba)})
+        keyboard.down().onPressDo({hermanos.mover(abajo)})
+        keyboard.left().onPressDo({hermanos.mover(izquierda)})
+        keyboard.right().onPressDo({hermanos.mover(derecha)})
 		keyboard.v().onPressDo({ hermanos.responder("v") })
 		keyboard.f().onPressDo({ hermanos.responder("f") })
 	}
@@ -21,7 +31,7 @@ program booGame {
 	config.teclas()
 
 
-	game.addVisualCharacter(hermanos)
+	game.addVisual(hermanos)
 	game.addVisual(contadorDeCaramelos)
 	
 	game.addVisual(ladron)

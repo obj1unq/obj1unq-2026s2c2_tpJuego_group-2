@@ -7,6 +7,10 @@ object hermanos {
   
   method image() = "fantasmasboo.png"
 
+  method mover(direccion) {
+  position = direccion.siguiente(position)
+  }
+
   method tienenCaramelos() {
     return contadorDeCaramelos.cantidad() >= 1
   }
