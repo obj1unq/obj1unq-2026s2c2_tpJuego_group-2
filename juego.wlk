@@ -3,7 +3,7 @@ import wollok.game.*
 object hermanos {
   var property position = game.at(3, 7)
   var property conQuienHablo = null
-  var armaEnUso = null
+  var superCarameloActual = null
   
   method image() = "fantasmasboo.png"
 
@@ -25,26 +25,26 @@ object hermanos {
     }
   }
 
-  method usarArma() {
-    inventario.usarArma(armaEnUso)
+ method usarSuperCaramelo() {
+    inventario.superCarameloEnUso(superCarameloActual)
   }
 
-  method guardarArma() {
-    if (armaEnUso != null) {
-      inventario.guardarArma(armaEnUso)
-      armaEnUso = null
+  method guardarSuperCaramelo() {
+    if (superCarameloActual != null) {
+      inventario.guardarSuperCaramelo(superCarameloActual)
+      superCarameloActual = null
     }
   }
 
-  method cambiarDeArma(_armaNueva) {
-    inventario.cambiarDeArma(_armaNueva, armaEnUso)
-    armaEnUso = _armaNueva
-  }    
+  method cambiarDeSuperCaramelo(_superCarameloNuevo) {
+    inventario.cambiarDeSuperCaramelo(_superCarameloNuevo, superCarameloActual)
+    superCarameloActual = _superCarameloNuevo
+  }
 }
 
 object generador {
   const tiposDeCaramelo = [bonobom, tita]
-  const tiposDeArmas = [cuchillo, navaja, martillo]
+  const tiposDeSuperCaramelos = [ferreroRocher]
 
   method crearCaramelo(posicion) {
     game.addVisual(new Caramelo(position = posicion, tipoDeCaramelo = tiposDeCaramelo.anyOne()))
@@ -54,12 +54,12 @@ object generador {
     self.crearCaramelo(self.posicionAleatoria())
   }
 
-  method crearArma(posicion) {
-    game.addVisual(new Arma(position = posicion, tipoDeArma = tiposDeArmas.anyOne()))
+  method crearsuperCaramelo(posicion) {
+    game.addVisual(new SuperCaramelo(position = posicion, tipoDeSuperCaramelo = tiposDeSuperCaramelos.anyOne()))
   }
 
-  method crearArmaAleatoriamente() {
-    self.crearArma(self.posicionAleatoria())
+  method crearsuperCarameloAleatoriamente() {
+    self.crearsuperCaramelo(self.posicionAleatoria())
   }
 
   method crearAleatoriamente() {
@@ -85,6 +85,9 @@ class Caramelo {
   }
 }  
 
+object ferreroRocher {
+  
+}
 object bonobom {}
 object tita {}
 
@@ -190,18 +193,18 @@ class Arbusto {
   }
 }
 
-class Arma {
+class SuperCaramelo {
   const property position 
-  const tipoDeArma
+  const tipoDeSuperCaramelo
   var property poder = 10
 
   method image() {
-    return "arma-" + tipoDeArma.toString() + ".png"
+    return "super-" + tipoDeSuperCaramelo.toString() + ".png"
   }
  
   method interactuar() {
     game.removeVisual(self)
-    inventario.guardarArma(self)
+    inventario.guardarSuperCaramelo(self)
   }
 }
 
@@ -216,42 +219,42 @@ const arbusto2 = new Arbusto(position = game.at(7, 7))
 const ladron2 = new Ladron(position = arbusto2.position())
 
 object inventario {
-  var property armas = #{}
+  var property superCaramelos = #{}
   var property image = "inventario.png"
   var dueñoDelInventario = hermanos
 
-  method guardarArma(_arma) {
-    armas.add(_arma)
+  method guardarSuperCaramelo(_superCaramelo) {
+    superCaramelos.add(_superCaramelo)
   }
    
-  method usarArma(_arma) {
-    if (self.existeArma(_arma)) {
-      armas.remove(_arma)
+  method superCarameloEnUso(_superCaramelo) {
+    if (self.existeSuperCaramelo(_superCaramelo)) {
+      superCaramelos.remove(_superCaramelo)
     } else {
-      cartelPregunta.text("El arma no está en el inventario para usarla")
+      cartelPregunta.text("El super caramelo no está en el inventario para usarla")
     }
   }
 
-  method armaConPoder(_poder) {
-    return armas.filter({ arma => arma.poder() == _poder })
+  method superCarameloConConPoder(_superCaramelo) {
+    return superCaramelos.filter({ superCaramelo => superCaramelo.poder() == _superCaramelo })
   }
    
-  method cambiarDeArma(_armaNueva, _armaVieja) {
-    self.validarCambiarDeArma(_armaNueva)
-    armas.remove(_armaNueva)
-    if (_armaVieja != null) {
-      armas.add(_armaVieja)
+  method cambiarDeSuperCaramelo(_superCarameloNuevo, _superCarameloViejo) {
+    self.validarCambiarDeSuperCaramelo(_superCarameloNuevo)
+    superCaramelos.remove(_superCarameloNuevo)
+    if (_superCarameloViejo != null) {
+      superCaramelos.add(_superCarameloViejo)
     }
   }
    
-  method validarCambiarDeArma(_arma) {
-    if (not self.existeArma(_arma)) {
-      game.say(dueñoDelInventario, "El arma pedida no está en el inventario")
+  method validarCambiarDeSuperCaramelo(_superCaramelo) {
+    if (not self.existeSuperCaramelo(_superCaramelo)) {
+      game.say(dueñoDelInventario, "El super caramelo pedido no está en el inventario")
     }
   }
    
-  method existeArma(_arma) {
-    return armas.contains(_arma)
+  method existeSuperCaramelo(_superCaramelo) {
+    return superCaramelos.contains(_superCaramelo)
   }
 }
 object vidas {

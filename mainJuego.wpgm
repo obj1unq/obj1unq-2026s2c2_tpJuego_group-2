@@ -44,9 +44,9 @@ program booGame {
 	generador.crearCarameloAleatoriamente()
 	generador.crearCarameloAleatoriamente()
 	generador.crearCarameloAleatoriamente()
-	generador.crearArmaAleatoriamente()
-	generador.crearArmaAleatoriamente()
-	generador.crearArmaAleatoriamente()
+	generador.crearsuperCarameloAleatoriamente()
+	generador.crearsuperCarameloAleatoriamente()
+	generador.crearsuperCarameloAleatoriamente()
 
 	game.addVisual(cartelPregunta)
 
