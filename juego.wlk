@@ -163,13 +163,14 @@ class Ladron {
         cartelPregunta.text("¡Rayos, es correcto! Te salvaste...")
       } else {
         self.robarCaramelo()
+        vidas.perderMediaVida()
       }
       game.schedule(2000, { cartelPregunta.text("") })
       esperandoRespuesta = false
       hizoPregunta = true
     }
   }
-
+  
   method robarCaramelo() {
     if (hermanos.tienenCaramelos()) {
       contadorDeCaramelos.restarCaramelo()
@@ -252,4 +253,16 @@ object inventario {
   method existeArma(_arma) {
     return armas.contains(_arma)
   }
+}
+object vidas {
+    var cantDeVida = 7
+    const property position = game.at(0, 9)
+
+    method image() {
+        return "vida-" + cantDeVida.toString() + ".png"
+    }
+
+    method perderMediaVida() {
+        cantDeVida = (cantDeVida - 1).max(1)
+    }
 }
