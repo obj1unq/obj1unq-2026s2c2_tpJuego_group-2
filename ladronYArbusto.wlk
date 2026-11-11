@@ -5,7 +5,7 @@ import caramelos.*
 import hermanos.*
 
 class Ladron {
-  const property position = arbusto.position()
+  const property position
   const property image = "arbusto-ladron.png"
   const pregunta = preguntasDisponibles.anyOne()
   var esperandoRespuesta = false

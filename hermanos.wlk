@@ -20,7 +20,7 @@ object hermanos {
   }
 
   method estanEnPosicionDeArbusto() {
-    return self.position() == arbusto.position()
+    return self.position() == Arbusto.position()
   }
 
   method responder(unaRespuesta) {

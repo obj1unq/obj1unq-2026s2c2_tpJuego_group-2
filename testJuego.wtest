@@ -1,6 +1,9 @@
 import juego.*
+import direcciones.*
+import ladronYArbusto.*
+import caramelos.*
 import mainJuego.config
-
+import hermanos.*
 
 describe "Tests de Ladron y Pregunta" {
 

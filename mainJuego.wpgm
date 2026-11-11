@@ -1,6 +1,9 @@
 import wollok.game.*
 import juego.*
 import direcciones.*
+import ladronYArbusto.*
+import caramelos.*
+import hermanos.*
 
  const arriba = new Arriba()
  const abajo = new Abajo()
@@ -35,12 +38,10 @@ program booGame {
 	game.addVisual(hermanos)
 	game.addVisual(contadorDeCaramelos)
 	
-	game.addVisual(ladron)
-	game.addVisual(arbusto)
-	
-	game.addVisual(ladron2)
-	game.addVisual(arbusto2)
-
+	generador.crearArbustoAleatoriamente()
+	generador.crearArbustoAleatoriamente()
+	generador.crearArbustoAleatoriamente()
+	generador.crearArbustoAleatoriamente()
 	generador.crearCarameloAleatoriamente()
 	generador.crearCarameloAleatoriamente()
 	generador.crearCarameloAleatoriamente()
