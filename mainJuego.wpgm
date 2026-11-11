@@ -24,8 +24,8 @@ object config {
         keyboard.s().onPressDo({hermanos.mover(abajo)})
         keyboard.a().onPressDo({hermanos.mover(izquierda)})
         keyboard.d().onPressDo({hermanos.mover(derecha)})
-		keyboard.v().onPressDo({ hermanos.responder("v") })
-		keyboard.f().onPressDo({ hermanos.responder("f") })
+		keyboard.v().onPressDo({hermanos.responder("v") })
+		keyboard.f().onPressDo({hermanos.responder("f") })
 	}
 }
 	
