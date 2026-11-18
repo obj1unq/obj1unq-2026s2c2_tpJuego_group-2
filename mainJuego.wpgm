@@ -4,7 +4,6 @@ import direcciones.*
 import ladronYArbusto.*
 import caramelos.*
 import hermanos.*
-import niveles.*
 
  const arriba = new Arriba()
  const abajo = new Abajo()
