@@ -1,5 +1,5 @@
 import wollok.game.*
-import direcciones.*
+import direccionesConSolidos.*
 import juego.*
 import ladronYArbusto.*
 import hermanos.*
@@ -7,7 +7,7 @@ import hermanos.*
 class Caramelo {
   const property position 
   const tipoDeCaramelo 
-
+method solido() { return false}
   method image() {
     return "caramelo-" + tipoDeCaramelo.toString() + ".png"
   }
@@ -43,7 +43,7 @@ class SuperCaramelo {
   const property position 
   const tipoDeSuperCaramelo
   var property poder = 10
-
+method solido() { return false}
   method image() {
     return "super-" + tipoDeSuperCaramelo.toString() + ".png"
   }

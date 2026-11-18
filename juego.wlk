@@ -1,5 +1,5 @@
 import wollok.game.*
-import direcciones.*
+import direccionesConSolidos.*
 import caramelos.*
 import ladronYArbusto.*
 import hermanos.*
@@ -104,7 +104,7 @@ object administradorDeNiveles {
 
 object meta {
     const property position = game.at(15, 5) 
-    
+    method solido() { return false}
     method image() {
         return "puerta.png" 
     }
