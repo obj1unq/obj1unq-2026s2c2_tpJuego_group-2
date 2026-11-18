@@ -48,6 +48,13 @@ object generador {
     self.crearArbusto(self.posicionValidaAleatoria())
   }
 
+  method limpiarNivelAnterior() {
+  const objetosPermanentes = #{hermanos, contadorDeCaramelos, vidas, inventario, meta, cartelPregunta}
+  const objetosAEliminar = game.allVisuals().filter({ visual => not objetosPermanentes.contains(visual) })
+  
+  objetosAEliminar.forEach({ visual => game.removeVisual(visual) })
+  }
+
 }
 
 object administradorDeNiveles {
@@ -58,10 +65,10 @@ object administradorDeNiveles {
     method pasarASiguienteNivel() {
         dificultad = dificultad +1
         game.say(hermanos, "¡Avanzaste al nivel " + dificultad.toString() + "!")
-
         game.boardGround(fondos.anyOne())
+        generador.limpiarNivelAnterior()
+        hermanos.position(game.at(0, 5))
         self.añadirObjetos()
-
     }
 
     method añadirObjetos() {
