@@ -9,12 +9,30 @@ object generador {
   const tiposDeSuperCaramelos = [ferreroRocher]
 
   method posicionAleatoria() {
-    return game.at((0..game.width() - 1).anyOne(), (0..game.height() - 1).anyOne())
+    return game.at((0..game.width() - 1).anyOne(),
+                   (0..game.height() - 1).anyOne())
   }
 
+    // Lista con las posiciones de los elementos fijos que NO se pueden pisar
+  method posicionesProhibidas() {
+    return [
+      hermanos.position(),
+      contadorDeCaramelos.position(),
+      vidas.position()
+    ]
+    + meta.posicionesProhibidas()
+  }
+
+  // Evalúa si una posición está libre de objetos fijos y de otros elementos ya generados
+  method esPosicionValida(posicion) {
+    return not self.posicionesProhibidas().contains(posicion) 
+           and game.getObjectsIn(posicion).isEmpty()
+  }
+
+  // Busca de forma recursiva hasta encontrar una posición totalmente válida
   method posicionValidaAleatoria() { 
     const posicion = self.posicionAleatoria() 
-    return if (posicion != hermanos.position()) posicion 
+    return if (self.esPosicionValida(posicion)) posicion 
            else self.posicionValidaAleatoria() 
   }
 
@@ -101,4 +119,12 @@ object meta {
             game.say(hermanos, "¡Aún faltan caramelos para poder avanzar!")
         }
     }
+
+    method posicionesProhibidas() {
+        return (0..4).map({ x =>
+                  (0..4).map({ y => 
+                    (game.at(position.x() + x, position.y() + y))
+                  })     
+                }).flatten()
+      }
 }
