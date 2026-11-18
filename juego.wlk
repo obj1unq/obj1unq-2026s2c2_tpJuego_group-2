@@ -47,4 +47,5 @@ object generador {
   method crearArbustoAleatoriamente() {
     self.crearArbusto(self.posicionValidaAleatoria())
   }
+
 }
