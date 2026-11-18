@@ -18,6 +18,13 @@ object config {
 		game.width(20)
 		game.boardGround("1erfondo.jpg")
 		cartelPregunta.position(game.at((game.width() - 1) / 2, 0))
+
+
+		const musicaFondo = game.sound("musica_general.mp3")
+		musicaFondo.shouldLoop(true)
+		musicaFondo.volume(0.5)
+		game.schedule(100, { musicaFondo.play() })
+		
 	}
 	method teclas() {
 		keyboard.w().onPressDo({hermanos.mover(arriba)})
@@ -36,8 +43,11 @@ program booGame {
 	game.addVisual(vidas)
 
 	game.addVisual(hermanos)
-	game.addVisual(contadorDeCaramelos)
 	
+	game.addVisual(contadorDeCaramelos)
+	game.addVisual(inventario)
+
+
 	generador.crearArbustoAleatoriamente()
 	generador.crearArbustoAleatoriamente()
 	generador.crearArbustoAleatoriamente()
