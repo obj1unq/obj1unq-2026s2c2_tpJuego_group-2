@@ -4,6 +4,7 @@ import direcciones.*
 import ladronYArbusto.*
 import caramelos.*
 import hermanos.*
+import niveles.*
 
  const arriba = new Arriba()
  const abajo = new Abajo()
@@ -46,6 +47,7 @@ program booGame {
 	
 	game.addVisual(contadorDeCaramelos)
 	game.addVisual(inventario)
+	game.addVisual(meta)
 
 
 	generador.crearArbustoAleatoriamente()
