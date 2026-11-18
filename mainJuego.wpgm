@@ -1,6 +1,6 @@
 import wollok.game.*
 import juego.*
-import direcciones.*
+import direccionesConSolidos.*
 import ladronYArbusto.*
 import caramelos.*
 import hermanos.*
@@ -26,6 +26,33 @@ object config {
 		game.schedule(100, { musicaFondo.play() })
 		
 	}
+
+	method generarBosqueSolido() {
+	  
+   game.addVisual(new BosqueSolido(position=game.at(0,9)))
+   game.addVisual(new BosqueSolido(position=game.at(1,9)))
+   game.addVisual(new BosqueSolido(position=game.at(2,9)))
+   game.addVisual(new BosqueSolido(position=game.at(3,9)))
+   game.addVisual(new BosqueSolido(position=game.at(4,9)))
+   game.addVisual(new BosqueSolido(position=game.at(5,9)))
+   game.addVisual(new BosqueSolido(position=game.at(6,9)))
+   game.addVisual(new BosqueSolido(position=game.at(7,9)))
+   game.addVisual(new BosqueSolido(position=game.at(8,9)))
+   game.addVisual(new BosqueSolido(position=game.at(9,9)))
+   game.addVisual(new BosqueSolido(position=game.at(10,9)))
+   game.addVisual(new BosqueSolido(position=game.at(11,9)))
+   game.addVisual(new BosqueSolido(position=game.at(12,9)))
+   game.addVisual(new BosqueSolido(position=game.at(13,9)))
+   game.addVisual(new BosqueSolido(position=game.at(14,9)))
+   game.addVisual(new BosqueSolido(position=game.at(15,9)))
+   game.addVisual(new BosqueSolido(position=game.at(16,9)))
+   game.addVisual(new BosqueSolido(position=game.at(17,9)))
+   game.addVisual(new BosqueSolido(position=game.at(18,9)))
+   game.addVisual(new BosqueSolido(position=game.at(19,9)))
+   game.addVisual(new BosqueSolido(position=game.at(20,9)))
+  
+	}
+
 	method teclas() {
 		keyboard.w().onPressDo({hermanos.mover(arriba)})
         keyboard.s().onPressDo({hermanos.mover(abajo)})
@@ -35,10 +62,13 @@ object config {
 		keyboard.f().onPressDo({hermanos.responder("f") })
 	}
 }
-	
+
+
+
 program booGame {
 	config.configurarEscenario()
 	config.teclas()
+	config.generarBosqueSolido()
 
 	game.addVisual(vidas)
 

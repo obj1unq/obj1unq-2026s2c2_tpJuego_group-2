@@ -1,5 +1,5 @@
 import wollok.game.*
-import direcciones.*
+import direccionesConSolidos.*
 import caramelos.*
 import ladronYArbusto.*
 import juego.*
@@ -98,3 +98,4 @@ object vidas {
         cantDeVida = (cantDeVida - 1).max(1)
     }
 }
+
