@@ -48,8 +48,9 @@ object hermanos {
 
 object inventario {
   var property superCaramelos = #{}
-  var property image = "inventario.png"
+  var property image = "inventario.jpg"
   var dueñoDelInventario = hermanos
+   const property position = game.at(9, 9) 
 
   method guardarSuperCaramelo(_superCaramelo) {
     superCaramelos.add(_superCaramelo)
