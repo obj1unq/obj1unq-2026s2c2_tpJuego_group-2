@@ -128,7 +128,7 @@ object administradorDeNiveles {
 }
 
 object meta {
-    const property position = game.at(15, 5) 
+    const property position = game.at(17, 3) 
     method solido() { return false}
     method image() {
         return "puerta.png" 
@@ -156,8 +156,8 @@ object meta {
 
 
 object entradaTienda {
-	var property position = game.at(8, 5)
-	method image() = "entradaTienda.gif"
+	var property position = game.at(17, 1)
+	method image() = "entradaSalidaTienda.png"
 	method solido() = false
 
 	method interactuar() {
@@ -244,30 +244,30 @@ object vendedor {
 }
 
 object tienda {
-	var property position = game.at(7, 5)
-	method image() = "tienda.png"
-	method solido() = false
-
 	method entrar() {
 		game.say(hermanos, "¡Entramos a la tienda!")
 		generador.limpiarNivelAnterior()
-		game.boardGround("fondoTienda.jpg")
+		game.boardGround("fondoTienda.png")
 		hermanos.position(game.at(2, 5))
 		game.addVisual(vendedor)
 		game.addVisual(salidaTienda)
 	}
 
 	method salir() {
-		game.removeVisual(self)
-		game.removeVisual(vendedor)
-		game.removeVisual(salidaTienda)
+		vendedor.ocultarBotones()
+		if (game.hasVisual(vendedor)) {
+			game.removeVisual(vendedor)
+		}
+		if (game.hasVisual(salidaTienda)) {
+			game.removeVisual(salidaTienda)
+		}
 		administradorDeNiveles.avanzarTrasTienda()
 	}
 }
 
 object salidaTienda {
 	var property position = game.at(14, 5)
-	method image() = "salidaTienda.gif"
+	method image() = "entradaSalidaTienda.png"
 	method solido() = false
 
 	method interactuar() {
