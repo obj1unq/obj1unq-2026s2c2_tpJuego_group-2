@@ -48,13 +48,17 @@ object hermanos {
 
 object inventario {
   var property superCaramelos = #{}
+  const property maximo = 4
   var property image = "inventario.jpg"
   var dueñoDelInventario = hermanos
    const property position = game.at(9, 9) 
 
   method guardarSuperCaramelo(_superCaramelo) {
+    if (self.estaLleno()) {
+        self.error("¡El inventario de super caramelos está lleno!")
+    }
     superCaramelos.add(_superCaramelo)
-  }
+}
    
   method superCarameloEnUso(_superCaramelo) {
     if (self.existeSuperCaramelo(_superCaramelo)) {
@@ -85,6 +89,9 @@ object inventario {
   method existeSuperCaramelo(_superCaramelo) {
     return superCaramelos.contains(_superCaramelo)
   }
+  method estaLleno() {
+        return superCaramelos.size() >= maximo
+    }
 }
 object vidas {
     var cantDeVida = 7
