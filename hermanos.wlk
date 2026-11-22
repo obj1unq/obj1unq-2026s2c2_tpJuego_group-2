@@ -51,7 +51,7 @@ object inventario {
   const property maximo = 4
   var property image = "inventario.jpg"
   var dueñoDelInventario = hermanos
-   const property position = game.at(9, 9) 
+  const property position = game.at(9, 9) 
 
   method guardarSuperCaramelo(_superCaramelo) {
     if (self.estaLleno()) {
