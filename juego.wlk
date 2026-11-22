@@ -202,7 +202,7 @@ object vendedor {
 
   method interactuar() {
     if (not esperandoDecision) {
-      game.say(self, "¡Querés cambiar 2 caramelos por un super caramelo? (Y = Aceptar / N = Rechazar)")
+      game.say(self, "¡Querés cambiar 2 caramelos por un super caramelo? Interactuá con los botones.")
       self.ofrecerIntercambio()
     }
   }
@@ -228,12 +228,8 @@ object vendedor {
         game.say(self, "¡Trato hecho! Ahí tenés tu super caramelo.")
       } else if (contadorDeCaramelos.cantidad() >= 2 and inventario.estaLleno()) {
         game.say(self, "¡Tenés el inventario lleno! No podés sumar más super caramelos.")
-      } else if (contadorDeCaramelos.cantidad() >= 1) {
-        contadorDeCaramelos.restarCaramelo()
-        contadorDeCaramelos.sumarUnCaramelo()
-        game.say(self, "¡Intercambio de caramelo realizado! Juntá 2 para un super caramelo.")
       } else {
-        game.say(self, "¡No tenés caramelos suficientes para el intercambio!")
+        game.say(self, "¡Necesitás al menos 2 caramelos para hacer el intercambio!")
       }
     }
   }
@@ -283,4 +279,11 @@ object tienda {
 }
 
 object salidaTienda {
-  var property position = game
+  var property position = game.at(1, 1)
+  method image() = "entradaSalidaTienda.png"
+  method solido() = false
+
+  method interactuar() {
+    tienda.salir()
+  }
+}
