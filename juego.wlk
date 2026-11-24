@@ -221,11 +221,11 @@ object vendedor {
     if (esperandoDecision) {
       self.ocultarBotones()
       if (contadorDeCaramelos.cantidad() >= 2 and not inventario.estaLleno()) {
-        contadorDeCaramelos.restarCaramelo()
-        contadorDeCaramelos.restarCaramelo()
+        inventario.consumirCaramelos(2)
         const nuevoSuper = new SuperCaramelo(position = game.at(6, 5), tipoDeSuperCaramelo = ferreroRocher)
+        inventario.guardarSuperCaramelo(nuevoSuper)
         game.addVisual(nuevoSuper)
-        game.say(self, "¡Trato hecho! Ahí tenés tu super caramelo.")
+        game.say(self, "¡Trato hecho! Guardé tu super caramelo en el inventario.")
       } else if (contadorDeCaramelos.cantidad() >= 2 and inventario.estaLleno()) {
         game.say(self, "¡Tenés el inventario lleno! No podés sumar más super caramelos.")
       } else {
@@ -277,7 +277,6 @@ object tienda {
     administradorDeNiveles.avanzarTrasTienda()
   }
 }
-
 object salidaTienda {
   var property position = game.at(1, 1)
   method image() = "entradaSalidaTienda.png"
