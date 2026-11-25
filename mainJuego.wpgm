@@ -1,6 +1,6 @@
 import wollok.game.*
 import juego.*
-import direcciones.*
+import direccionesConSolidos.*
 import ladronYArbusto.*
 import caramelos.*
 import hermanos.*
@@ -18,26 +18,66 @@ object config {
 		game.width(20)
 		game.boardGround("1erfondo.jpg")
 		cartelPregunta.position(game.at((game.width() - 1) / 2, 0))
+
+
+		const musicaFondo = game.sound("musica_general.mp3")
+		musicaFondo.shouldLoop(true)
+		musicaFondo.volume(0.5)
+		game.schedule(100, { musicaFondo.play() })
 	}
+
+	method generarBosqueSolido() {
+	  
+   game.addVisual(new BosqueSolido(position=game.at(0,9)))
+   game.addVisual(new BosqueSolido(position=game.at(1,9)))
+   game.addVisual(new BosqueSolido(position=game.at(2,9)))
+   game.addVisual(new BosqueSolido(position=game.at(3,9)))
+   game.addVisual(new BosqueSolido(position=game.at(4,9)))
+   game.addVisual(new BosqueSolido(position=game.at(5,9)))
+   game.addVisual(new BosqueSolido(position=game.at(6,9)))
+   game.addVisual(new BosqueSolido(position=game.at(7,9)))
+   game.addVisual(new BosqueSolido(position=game.at(8,9)))
+   game.addVisual(new BosqueSolido(position=game.at(9,9)))
+   game.addVisual(new BosqueSolido(position=game.at(10,9)))
+   game.addVisual(new BosqueSolido(position=game.at(11,9)))
+   game.addVisual(new BosqueSolido(position=game.at(12,9)))
+   game.addVisual(new BosqueSolido(position=game.at(13,9)))
+   game.addVisual(new BosqueSolido(position=game.at(14,9)))
+   game.addVisual(new BosqueSolido(position=game.at(15,9)))
+   game.addVisual(new BosqueSolido(position=game.at(16,9)))
+   game.addVisual(new BosqueSolido(position=game.at(17,9)))
+   game.addVisual(new BosqueSolido(position=game.at(18,9)))
+   game.addVisual(new BosqueSolido(position=game.at(19,9)))
+   game.addVisual(new BosqueSolido(position=game.at(20,9)))
+  
+	}
+
 	method teclas() {
 		keyboard.w().onPressDo({hermanos.mover(arriba)})
         keyboard.s().onPressDo({hermanos.mover(abajo)})
         keyboard.a().onPressDo({hermanos.mover(izquierda)})
         keyboard.d().onPressDo({hermanos.mover(derecha)})
-		keyboard.v().onPressDo({ hermanos.responder("v") })
-		keyboard.f().onPressDo({ hermanos.responder("f") })
+		keyboard.v().onPressDo({hermanos.responder("v") })
+		keyboard.f().onPressDo({hermanos.responder("f") })
 	}
 }
-	
+
+
+
 program booGame {
 	config.configurarEscenario()
 	config.teclas()
+	config.generarBosqueSolido()
 
 	game.addVisual(vidas)
 
 	game.addVisual(hermanos)
-	game.addVisual(contadorDeCaramelos)
 	
+	game.addVisual(contadorDeCaramelos)
+	game.addVisual(inventario)
+	game.addVisual(meta)
+
+
 	generador.crearArbustoAleatoriamente()
 	generador.crearArbustoAleatoriamente()
 	generador.crearArbustoAleatoriamente()

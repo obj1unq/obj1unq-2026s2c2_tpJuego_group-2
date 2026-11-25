@@ -1,5 +1,5 @@
 import wollok.game.*
-import direcciones.*
+import direccionesConSolidos.*
 import caramelos.*
 import ladronYArbusto.*
 import juego.*
@@ -48,13 +48,57 @@ object hermanos {
 
 object inventario {
   var property superCaramelos = #{}
-  var property image = "inventario.png"
+  var property caramelos = #{}
+  const property maximo = 4
+  var property image = "inventario.jpg"
   var dueñoDelInventario = hermanos
+  const property position = game.at(9, 9)
+
+  method guardarCaramelo(unTipo) {
+    const existente = caramelos.findOrDefault({ entrada => entrada.tipo() == unTipo }, null)
+    if (existente != null) {
+      existente.sumar(1)
+    } else {
+      caramelos.add(new EntradaCaramelo(tipo = unTipo, cantidad = 1))
+    }
+  }
+
+  method cantidadDeCaramelo(unTipo) {
+    const existente = caramelos.findOrDefault({ entrada => entrada.tipo() == unTipo }, null)
+    return if (existente != null) existente.cantidad() else 0
+  }
+
+  method totalCaramelos() {
+    return caramelos.sum({ entrada => entrada.cantidad() })
+  }
+
+  method consumirCaramelos(unaCantidad) {
+    var restantesPorQuitar = unaCantidad
+    caramelos.forEach({ entrada =>
+      if (restantesPorQuitar > 0 and entrada.cantidad() > 0) {
+        const aQuitar = entrada.cantidad().min(restantesPorQuitar)
+        entrada.restar(aQuitar)
+        restantesPorQuitar -= aQuitar
+      }
+    })
+    caramelos = caramelos.filter({ entrada => entrada.cantidad() > 0 })
+    contadorDeCaramelos.restarCantidad(unaCantidad)
+  }
+
+  method resumenCaramelos() {
+    if (caramelos.isEmpty()) {
+      return "Sin caramelos"
+    }
+    return caramelos.map({ entrada => entrada.descripcion() }).join(", ")
+  }
 
   method guardarSuperCaramelo(_superCaramelo) {
+    if (self.estaLleno()) {
+      self.error("¡El inventario de super caramelos está lleno!")
+    }
     superCaramelos.add(_superCaramelo)
   }
-   
+
   method superCarameloEnUso(_superCaramelo) {
     if (self.existeSuperCaramelo(_superCaramelo)) {
       superCaramelos.remove(_superCaramelo)
@@ -63,10 +107,10 @@ object inventario {
     }
   }
 
-  method superCarameloConConPoder(_superCaramelo) {
-    return superCaramelos.filter({ superCaramelo => superCaramelo.poder() == _superCaramelo })
+  method superCarameloConConPoder(unPoder) {
+    return superCaramelos.filter({ superCaramelo => superCaramelo.poder() == unPoder })
   }
-   
+
   method cambiarDeSuperCaramelo(_superCarameloNuevo, _superCarameloViejo) {
     self.validarCambiarDeSuperCaramelo(_superCarameloNuevo)
     superCaramelos.remove(_superCarameloNuevo)
@@ -74,15 +118,19 @@ object inventario {
       superCaramelos.add(_superCarameloViejo)
     }
   }
-   
+
   method validarCambiarDeSuperCaramelo(_superCaramelo) {
     if (not self.existeSuperCaramelo(_superCaramelo)) {
       game.say(dueñoDelInventario, "El super caramelo pedido no está en el inventario")
     }
   }
-   
+
   method existeSuperCaramelo(_superCaramelo) {
     return superCaramelos.contains(_superCaramelo)
+  }
+
+  method estaLleno() {
+    return superCaramelos.size() >= maximo
   }
 }
 object vidas {
@@ -97,3 +145,4 @@ object vidas {
         cantDeVida = (cantDeVida - 1).max(1)
     }
 }
+

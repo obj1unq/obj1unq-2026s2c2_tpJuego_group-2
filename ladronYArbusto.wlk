@@ -1,5 +1,5 @@
 import wollok.game.*
-import direcciones.*
+import direccionesConSolidos.*
 import juego.*
 import caramelos.*
 import hermanos.*
