@@ -1,3 +1,9 @@
+import wollok.game.*
+import juego.*
+import ladronYArbusto.*
+import caramelos.*
+import hermanos.*
+
 class Direccion {
  method siguiente(position) {
    const candidata = self._siguiente(position)
@@ -52,12 +58,8 @@ class Izquierda inherits Direccion{
 
 
 
-class BosqueSolido {
- const property position
- method image() {return "solido.png"}
- method solido() { return true}
- method interactuar(personaje) {
-   
- }
+class BosqueSolido inherits Visual {
+  override method image() = "solido.png"
+  override method solido() = true
 }
 

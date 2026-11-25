@@ -4,17 +4,16 @@ import juego.*
 import caramelos.*
 import hermanos.*
 
-class Ladron {
-  const property position
-  const property image = "arbusto-ladron.png"
+class Ladron inherits Visual {
   const pregunta = preguntasDisponibles.anyOne()
   var esperandoRespuesta = false
   var hizoPregunta = false
 
-  method interactuar() {
+  override method image() = "arbusto-ladron.png"
+
+  override method interactuar() {
     self.asaltarHermanos()
   }
-
   method asaltarHermanos() {
     if (not esperandoRespuesta and not hizoPregunta) {
       self.hacerPregunta()
@@ -56,6 +55,7 @@ object cartelPregunta {
   var property text = "" 
   method textColor() = "#ffffff" 
   method textSize() = 100
+    method solido() { return false }
   }
 
 const preguntasDisponibles = [ 
@@ -68,7 +68,7 @@ new Pregunta(texto = "¿La luna es de queso? (Presiona V o F)", respuestaCorrect
 class Pregunta {
   const property texto
   const property respuestaCorrecta
-
+  method solido() { return false }
   method realizar(unVisual) {
     game.say(unVisual, texto)
   }
@@ -80,11 +80,10 @@ class Pregunta {
   }
 }
 
-class Arbusto {
-  var property position 
-  var property image = "arbusto.png"
+class Arbusto inherits Visual {
+  override method image() = "arbusto.png"
 
-  method interactuar() {
+  override method interactuar() {
     game.removeVisual(self)
   }
 }
