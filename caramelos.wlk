@@ -4,23 +4,25 @@ import juego.*
 import ladronYArbusto.*
 import hermanos.*
 
-class Caramelo {
+class Visual {
   const property position
+
+  method image()
+  method solido() = false
+  method interactuar() {}
+  
+}
+
+class Caramelo inherits Visual {
   const property tipoDeCaramelo
 
-  method solido() { return false }
-
-  method image() {
-    return "caramelo-" + tipoDeCaramelo.toString() + ".png"
-  }
-
-  method interactuar() {
+  override method image() = "caramelo-" + tipoDeCaramelo.toString() + ".png"
+  override method interactuar() {
     game.removeVisual(self)
     inventario.guardarCaramelo(tipoDeCaramelo)
     contadorDeCaramelos.sumarUnCaramelo()
   }
 }
-
 object ferreroRocher {}
 object bonobom {}
 object tita {}
@@ -46,18 +48,14 @@ object contadorDeCaramelos {
   }
 }
 
-class SuperCaramelo {
-  const property position
+
+class SuperCaramelo inherits Visual {
   const property tipoDeSuperCaramelo
   var property poder = 10
 
-  method solido() { return false }
+  override method image() = "super-" + tipoDeSuperCaramelo.toString() + ".png"
 
-  method image() {
-    return "super-" + tipoDeSuperCaramelo.toString() + ".png"
-  }
-
-  method interactuar() {
+  override method interactuar() {
     game.removeVisual(self)
     inventario.guardarSuperCaramelo(self)
   }

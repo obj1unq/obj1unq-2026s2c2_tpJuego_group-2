@@ -7,7 +7,30 @@ import hermanos.*
 object generador {
   const tiposDeCaramelo = [bonobom, tita]
   const tiposDeSuperCaramelos = [ferreroRocher]
+const bordes = #{} // Guardamos acá todos los arbustos sólidos del borde
 
+  method generarBosqueSolido() {
+    const ancho = game.width() - 1
+    const alto = game.height() - 1
+
+    (0..ancho).forEach({ x =>
+      self.agregarBorde(game.at(x, 0))
+      self.agregarBorde(game.at(x, alto))
+    })
+
+    (1..alto - 1).forEach({ y =>
+      self.agregarBorde(game.at(0, y))
+      if (y != meta.position().y()) {
+        self.agregarBorde(game.at(ancho, y))
+      }
+    })
+  }
+
+  method agregarBorde(posicion) {
+    const borde = new BosqueSolido(position = posicion)
+    bordes.add(borde)
+    game.addVisual(borde)
+  }
   method posicionAleatoria() {
     return game.at(
       (0..game.width() - 1).anyOne(),
@@ -75,8 +98,9 @@ object generador {
   }
 
   method limpiarNivelAnterior() {
-    const objetosPermanentes = #{hermanos, contadorDeCaramelos, vidas, inventario, meta, cartelPregunta}
+    const objetosPermanentes = #{hermanos, contadorDeCaramelos, vidas, inventario, meta, cartelPregunta}.union(bordes)
     const objetosAEliminar = game.allVisuals().filter({ visual => not objetosPermanentes.contains(visual) })
+    
 
     objetosAEliminar.forEach({ visual =>
       if (game.hasVisual(visual)) {
@@ -112,7 +136,7 @@ object administradorDeNiveles {
   method cargarNivelActual() {
     generador.limpiarNivelAnterior()
     game.boardGround(fondos.anyOne())
-    hermanos.position(game.at(0, 5))
+    hermanos.position(game.at(1, 5))
     self.añadirObjetos()
 
     if (self.debeAparecerEntradaTienda() and not game.hasVisual(entradaTienda)) {
@@ -140,7 +164,7 @@ object administradorDeNiveles {
 }
 
 object meta {
-  const property position = game.at(17, 3)
+  method position() = game.at(game.width() - 1, 2)
   method solido() { return false }
   method image() {
     return "puerta.png"
@@ -156,9 +180,9 @@ object meta {
   }
 
   method posicionesProhibidas() {
-    return (0..4).map({ x =>
-      (0..4).map({ y =>
-        game.at(position.x() + x, position.y() + y)
+    return (-3..0).map({ dx =>
+      (-1..1).map({ dy =>
+        game.at(self.position().x() + dx, self.position().y() + dy)
       })
     }).flatten()
   }

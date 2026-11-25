@@ -1,5 +1,5 @@
 import juego.*
-import direcciones.*
+import direccionesConSolidos.*
 import ladronYArbusto.*
 import caramelos.*
 import mainJuego.config
