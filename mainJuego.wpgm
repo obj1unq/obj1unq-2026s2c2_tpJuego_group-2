@@ -59,8 +59,6 @@ object config {
         keyboard.d().onPressDo({hermanos.mover(derecha)})
 		keyboard.v().onPressDo({hermanos.responder("v") })
 		keyboard.f().onPressDo({hermanos.responder("f") })
-		keyboard.y().onPressDo({ vendedor.aceptarIntercambio() })
-        keyboard.n().onPressDo({ vendedor.rechazarIntercambio() })
 	}
 }
 

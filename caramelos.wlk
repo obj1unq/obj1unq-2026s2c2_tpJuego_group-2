@@ -16,7 +16,6 @@ class Caramelo {
 
   method interactuar() {
     game.removeVisual(self)
-    inventario.guardarCaramelo(tipoDeCaramelo)
     contadorDeCaramelos.sumarUnCaramelo()
   }
 }
@@ -59,21 +58,6 @@ class SuperCaramelo {
 
   method interactuar() {
     game.removeVisual(self)
-    inventario.guardarSuperCaramelo(self)
   }
 }
 
-class EntradaCaramelo {
-  const property tipo
-  var property cantidad = 1
-
-  method sumar(unaCantidad) {
-    cantidad += unaCantidad
-  }
-
-  method restar(unaCantidad) {
-    cantidad = 0.max(cantidad - unaCantidad)
-  }
-
-  method descripcion() = tipo.toString() + ": " + cantidad.toString()
-}
